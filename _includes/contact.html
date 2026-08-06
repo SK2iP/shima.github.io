@@ -72,7 +72,14 @@
       <a href="https://twitter.com/{{ sidebar.twitter }}" target="_blank">{{ sidebar.twitter }}</a>
     </li>
     {% endif %}
-
+    
+    {% if sidebar.bluesky %}
+    {% assign bluesky_handle = sidebar.bluesky | remove: '@' %}
+    <li class="bluesky"><i class="fab fa-bluesky"></i>
+      <a href="https://bsky.app/profile/{{ bluesky_handle }}" target="_blank">{{ sidebar.bluesky }}</a>
+    </li>
+    {% endif %}
+    
     {% if sidebar.mastodon %}
     {% assign mastodon_handle = sidebar.mastodon | split: '/' %}
     <li class="mastodon"><i class="fab fa-mastodon"></i>
@@ -112,13 +119,13 @@
 
     {% if sidebar.pdf %}
     <li class="pdf"><i class="fas fa-file-pdf"></i>
-      <a href="https://{{ sidebar.pdf }}" target="_blank">Resume PDF</a>
+      <a href="{{ sidebar.pdf }}" target="_blank">Resume PDF</a>
     </li>
     {% endif %}
 
     {% if sidebar.pdf2 %}
     <li class="pdf"><i class="fas fa-file-pdf"></i>
-      <a href="https://{{ sidebar.pdf2 }}" target="_blank">PDF file of this website</a>
+      <a href="{{ sidebar.pdf2 }}" target="_blank">PDF file of this website</a>
     </li>
     {% endif %}
 

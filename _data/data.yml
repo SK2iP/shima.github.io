@@ -36,8 +36,8 @@ sidebar:
         - item: Embedded Systems
         - item: Robotics
 
-    pdf: github.com/sk2ip/sk2ip.github.io/blob/master/pdf/short_resume.pdf
-    pdf2: github.com/sk2ip/sk2ip.github.io/blob/master/pdf/website_pdf.pdf
+    pdf: https://github.com/sk2ip/sk2ip.github.io/blob/master/pdf/short_resume.pdf
+    pdf2: https://github.com/sk2ip/sk2ip.github.io/blob/master/pdf/website_pdf.pdf
 
 education:
     title: Education
