@@ -1,0 +1,21 @@
+{% assign rewards = site.data.data.rewards %}
+{% if rewards %}
+<section class="section publications-section">
+
+  <h2 class="section-title">
+    <span class="fa-stack fa-xs">
+      <i class="fas fa-circle fa-trophy"></i>
+      <i class="fas fa-file-alt fa-trophy fa-inverse"></i>
+    </span>
+    {{ rewards.title }}
+  </h2>
+
+  <ul>
+  {% for title in rewards.titles %}
+  <li class="reward-title">{{title.year}} - {{ title.place }} in {{ title.event}}, {{ title.where }}</li>
+  {% endfor %}
+  </ul>
+
+
+</section><!--//section-->
+{% endif %}

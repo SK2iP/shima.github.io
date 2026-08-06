@@ -1,0 +1,209 @@
+sidebar:
+    position: right
+    about: false
+    education: True
+
+    # Profile information
+    name: Sadra Khanjari
+    tagline: Software Developer
+    tagline2: Electrical Engineer
+    avatar: sadra.png  # Ensure this image is placed in /assets/images/
+
+    # Sidebar links
+    email: sadra.khanjari@gmail.com
+    phone: +98 910 116 9066
+    timezone: Iran/Tehran
+    website: sk2ip.github.io
+    linkedin: sadra-khanjari
+    github: SK2iP
+
+    languages:
+      title: Languages
+      info:
+        - idiom: English
+          level: Advanced (C1)
+      
+        - idiom: Persian
+          level: Native
+
+    interests:
+      title: Interests
+      info:
+        - item: Software Development
+        - item: Artificial Intelligence
+        - item: Machine Learning
+        - item: Dev Ops
+        - item: Embedded Systems
+        - item: Robotics
+
+    pdf: github.com/sk2ip/sk2ip.github.io/blob/master/pdf/short_resume.pdf
+    pdf2: github.com/sk2ip/sk2ip.github.io/blob/master/pdf/website_pdf.pdf
+
+education:
+    title: Education
+    info:
+      - degree: BSc in Electrical Engineering
+        university: Sharif University of Technology, Tehran
+        time: 2021 - Present
+        details: |
+          Focus on embedded systems, artificial intelligence, and machine learning, with hands-on experience in robotic projects and competitions.
+      - degree: High School Diploma in Mathematics and Physics
+        school: Atomic Energy High School, Tehran
+        time: 2018 - 2021
+
+career-profile:
+    title: Career Profile
+    summary: |
+          I'm an Electrical Engineer with a strong self-taught background in software development, eager to work in machine learning, data science, full-stack development, and robotics. I possess strong problem-solving skills, a fast-learning mindset, and valuable teamwork experience from my role as the Lead AI and Robotics Instructor. I’ve also developed solid programming expertise through contributing to open-source projects. With knowledge of Python, C++, C, HTML, CSS, and JavaScript, I’m excited to join a team where I can apply my skills and continue learning from others.
+experiences:
+    title: Professional Experience
+    info:
+      - role: Lead AI and Robotics Instructor
+        company: AERT Research Team
+        time: July 2021 - June 2024
+        details: |
+              - Leading the AI and robotics department.
+              - Teaching AI and robotics concepts to students using Soccer Simulation2D.
+              - Developing and maintaining the team's codebase.
+      - role: IT Specialist
+        company: Nimaad Cloud Processing, Tehran
+        time: August 2023 - February 2024
+        details: |
+              - Managed the company's cloud infrastructure.
+              - Provided technical support to the team.
+              - Confifured and maintained the company's servers.
+              - Developed and implemented Ansible scripts to automate the configuration of cloud servers based on customer orders.
+              - Set up and configured company computers, including Windows installation and software setup for optimal performance and security.
+      - role: Technical Committee Member
+        company: IranOpen Robotics Competition
+        time: May 2022 - Present
+        details: |
+              - Contributed to the development of a **workshop.rcss.ir** aimed at helping individuals in Iran learn about soccer simulation 2D leauge of robocup.
+              - Assisted in organizing the 2D Soccer Simulation League Competition.
+              - Created instructional videos and written materials to enhance the learning experience for students in soccer simulation.
+              - Assisted in creating the **StarterAgent2D-V2** base, serving as a foundational base for students to participate in the 2D Soccer Simulation League.
+      - role: Software Developer (Self-Taught)
+        company: Academic and Independent Work
+        time: July 2021 - Present
+        details: |
+              - Contributed to the development of **CLSFramework**, a 2D soccer simulation framework that allows participants to compete using various programming languages beyond C++.
+              - Built a **Java-based social media application** resembling Twitter as an object-oriented programming project for student engagement and learning.
+              - Created an **oscilloscope simulation function** for an electrical circuits course project, enhancing student comprehension of waveform behavior.
+              - Collaborated on the **PCGPT project**, which integrates Procedural Content Generation Reinforcement Learning (PCGRL) and Discrete Transformers to advance automated game content generation, promoting dynamic gameplay.
+              - Designed and implemented a **calculator in Assembly language** on a PIC32 microcontroller for a Computer & Microprocessor Architecture course.
+              - Developed a **signal processing system** on the Zynq 7000 platform. Generated waveforms in Programmable Logic (PL), unscrambled and analyzed signals with FFT, and displayed both the signal and frequency spectrum via HDMI.
+
+rewards:
+    title: Rewards and Achievements
+    intro: |
+    titles:
+      - place: 2nd Place
+        event: RoboCup, Soccer Simulation 2D League
+        where: Hanover, Netherlands
+        year: 2024
+      - place: 1st Place  
+        event: IranOpen RoboCup Competition, Soccer Simulation 2D League
+        where: Tehran , Iran
+        year: 2024
+      - place: 1st Place  
+        event: IranOpen RoboCup Competition, Soccer Simulation 2D League
+        where: Tehran , Iran
+        year: 2023 
+      - place: 3rd Place 
+        event: RoboCup, Soccer Simulation 2D League - Coopeartion Challange
+        where: Bangkok , Thailand
+        year: 2022
+      - place: 92nd Place
+        event: National Universities Entrance Exams out of +165,000 undergraduate applicants
+        where: Tehran, Iran
+        year: 2021
+      - place: 3rd Place 
+        event: One Idea One world - Biomedical Engineering 
+        where: Tehran, Iran
+        year: 2019
+
+
+publications:
+    title: Publications
+    papers:
+      - title: Pyrus 2023 Team Description Paper
+        authors: Reza Aghayari, Sadra Khanjari
+        conference: Iran Open
+        time: May 2023
+      - title: Tehran2D Team Description Paper
+        authors: Sadra Khanjari
+        conference: RoboCup
+        time: August 2022
+      - title: Observation Denoising in CYRUS Soccer Simulation 2D Team For RoboCup 2024
+        authors: Nader Zare, Aref Sayareh, Sadra Khanjari, Arad Firouzkouhi
+        conference: RoboCup
+        time: June 2024
+
+projects:
+    title: Key Projects
+    intro: |
+      I have been involved in various projects, focusing on backend development, AI systems, and embedded software.
+    assignments:
+        - title: workshop.rcss.ir 
+          link: https://workshop.rcss.ir
+          tagline: A platform for the Iranian RoboCup community to learn about Soccer Simulation 2D
+          details: |
+            - Developed a platform for the Iranian RoboCup community to share resources, tutorials, and news.
+        - title: CLSframework
+          link: https://clsframework.github.io
+          tagline: A gRPC/thrift based framework for Soccer Simulation 2D teams
+          details: |
+            - This project is a framework for developing Soccer Simulation 2D teams using gRPC and Thrift for pepople who want to develop their own team in other languages than C++.
+        - title: StarterAgent2D-V2 Base
+          tagline: A base code for students in Soccer Simulation 2D teams
+          details: |
+            - Developed a base code for Soccer Simulation 2D student teams to help new teams get started with the RoboCup competition.
+
+certifications:
+    title: Certifications
+    list:
+      - name: Python for Everybody
+        organization: Coursera
+        end: October 2023
+      - name: Young Entrepreneurs Course
+        organization: Industrial Management Institute
+        end: June 2022
+      - name: Technical Committee Certification
+        organization: Iran Open
+        end: May 2023
+      - name: Technical Committee Certification
+        organization: Iran Open
+        end: May 2024
+      - name: Date and Time in Python
+        organization: 365 Data Science
+        end: July 2024
+      - name: Data Cleaning and Preprocessing with pandas
+        organization: 365 Data Science
+        end: August 2024
+      - name: Human resources comprehensive course
+        organization: Industrial Management Institute
+        end: September 2024
+
+
+skills2:
+    title: Skills &amp; Proficiency
+    toolset:
+      - name: Programming Languages
+        subnames: Python, C++, C, CUDA, Java, CSS, HTML, Javascript , Go , Verilog , Assembely
+      - name: Data Base
+        subnames: MySQL
+      - name: Artificial Intelligent Concepts
+        subnames: Deep Learning, Deep Reinforcement Learning
+      - name: Machine Learning Frameworks
+        subnames: Keras, Tensorflow, Stable Baselines3, Pandas, NumPy
+      - name: OS
+        subnames: Ubuntu, Windows
+      - name: Technologies and Frameworks
+        subnames: Django, Git, GitLAB, Docker, Svelte, RabbitMQ, Ansible, Arduino, Raspberry pi
+      - name: Integrated development environment (IDE)
+        subnames: VSCode, Pycharm, CLion, Qt Creator, MATLAB
+
+
+footer: >
+    Designed with <i class="fas fa-heart"></i> by <a href="http://themes.3rdwavemedia.com" target="_blank" rel="nofollow">Xiaoying Riley</a>      
+
