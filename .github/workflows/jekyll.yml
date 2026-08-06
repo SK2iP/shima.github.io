@@ -35,7 +35,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Setup Ruby
         # v1 is a moving major tag maintained by ruby/setup-ruby; older pinned
-        # releases (e.g. v1.161.0) predate ubuntu-24.04 and wrongly treat the
+        # releases (e.g. v1.161.0) predate ubuntu-24.04 and misdetect the
         # GitHub-hosted runner as self-hosted.
         uses: ruby/setup-ruby@v1
         with:
@@ -45,6 +45,8 @@ jobs:
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
+        with:
+          enablement: true
       - name: Build with Jekyll
         # Outputs to the './_site' directory by default
         run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
