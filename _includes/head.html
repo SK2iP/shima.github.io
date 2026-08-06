@@ -1,35 +1,91 @@
+{% assign sb = site.data.data.sidebar %}
+{% assign page_title = site.title | append: ' — ' | append: sb.tagline %}
+{% assign og_image = '/assets/images/profile.png' | absolute_url %}
 <head>
-  <title>{{ site.title }}</title>
-
-  <!-- Meta -->
   <meta charset="utf-8">
-  {% if site.chrome_mobile_color %}
-  <meta name="theme-color" content="{{ site.chrome_mobile_color }}">
-  {% endif%}
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="{{ site.description |default: "A beautiful
-  Jekyll theme for creating resume" }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Favicon -->
-  <link rel="shortcut icon" href="favicon.ico">
+  <title>{{ page_title }}</title>
+  <meta name="description" content="{{ site.description | strip_newlines | strip }}">
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
 
-  <!-- Global CSS -->
-  <link rel="stylesheet" href="{{ site.baseurl }}/assets/plugins/bootstrap/css/bootstrap.css">
+  {% comment %} Theme is applied before first paint to avoid a flash of the wrong theme. {% endcomment %}
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('theme');
+        if (t !== 'dark' && t !== 'light') {
+          t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    })();
+  </script>
 
-  <!-- Plugins CSS -->
-  <link rel="stylesheet" href="{{ site.baseurl }}/assets/plugins/font-awesome/css/all.css">
+  <meta name="theme-color" content="{{ site.chrome_mobile_color | default: '#1976d2' }}" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#11161c" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
 
-  <!-- html2pdf library -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
-    integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!-- Icons -->
+  <link rel="icon" href="{{ '/favicon.ico' | relative_url }}" sizes="32x32">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="profile">
+  <meta property="og:title" content="{{ page_title }}">
+  <meta property="og:description" content="{{ site.description | strip_newlines | strip }}">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  <meta property="og:image" content="{{ og_image }}">
+  <meta property="og:locale" content="en_US">
+  <meta property="profile:first_name" content="Shima">
+  <meta property="profile:last_name" content="Nouri">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="{{ page_title }}">
+  <meta name="twitter:description" content="{{ site.description | strip_newlines | strip }}">
+  <meta name="twitter:image" content="{{ og_image }}">
 
   <!-- Theme CSS -->
-  <link id="theme-style" rel="stylesheet" href="{{ site.baseurl }}/assets/css/main.css">
-  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-  <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": {{ sb.name | jsonify }},
+    "jobTitle": {{ sb.tagline | jsonify }},
+    "url": {{ site.url | append: site.baseurl | jsonify }},
+    "image": {{ og_image | jsonify }},
+    "email": {{ sb.email | prepend: 'mailto:' | jsonify }},
+    "telephone": {{ sb.phone | jsonify }},
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Tehran",
+      "addressCountry": "IR"
+    },
+    "sameAs": [
+      {{ sb.linkedin | prepend: 'https://www.linkedin.com/in/' | jsonify }}
+    ],
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Okala",
+      "url": "https://okala.com"
+    },
+    "alumniOf": [
+      {% for e in site.data.data.education.info %}
+      {
+        "@type": "CollegeOrUniversity",
+        "name": {{ e.university | jsonify }}
+      }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ],
+    "knowsAbout": [
+      {% for group in site.data.data.skills.toolset %}
+        {% assign items = group.subnames | replace: '&amp;', '&' | split: ', ' %}
+        {% for item in items %}{{ item | strip | jsonify }}{% unless forloop.last and forloop.parentloop.last %},{% endunless %}{% endfor %}
+      {% endfor %}
+    ]
+  }
+  </script>
 </head>

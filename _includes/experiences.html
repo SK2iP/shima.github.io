@@ -1,37 +1,47 @@
 {% assign experiences = site.data.data.experiences %}
 {% if experiences %}
-<section class="section experiences-section">
-  <h2 class="section-title">
-    <span class="fa-stack fa-xs">
-      <i class="fas fa-circle fa-stack-2x"></i>
-      <i class="fas fa-briefcase fa-stack-1x fa-inverse"></i>
-    </span>
+<section class="section experiences-section" id="experience" aria-labelledby="experience-title">
+  <h2 class="section-title" id="experience-title">
+    <span class="section-icon" aria-hidden="true"><svg class="icon"><use href="#i-briefcase" /></svg></span>
     {{ experiences.title }}
   </h2>
 
+  <ol class="item-list list-unstyled">
   {% for experience in experiences.info %}
-  <div class="item">
+    <li class="item">
 
-    <div class="meta">
+      <div class="meta">
 
-      <div class="upper-row">
-        <h3 class="job-title">{{ experience.role }}</h3>
-        <div class="time">{{ experience.time }}</div>
-      </div><!--//upper-row-->
+        <div class="upper-row">
+          <h3 class="job-title">{{ experience.role }}</h3>
+          <div class="time">{{ experience.time }}</div>
+        </div><!--//upper-row-->
 
-      <div class="company">{{ experience.company }}</div>
+        <div class="company">
+          {% if experience.company_url %}
+          <a href="{{ experience.company_url }}" target="_blank" rel="noopener noreferrer">{{ experience.company }}</a>
+          {% else %}
+          {{ experience.company }}
+          {% endif %}
+          {% if experience.concurrent %}
+          <span class="badge-concurrent">{{ experience.concurrent_label | default: 'Concurrent Project' }}</span>
+          {% endif %}
+          {% if experience.company_note %}
+          <span class="company-note">{{ experience.company_note }}</span>
+          {% endif %}
+        </div>
 
-    </div><!--//meta-->
+      </div><!--//meta-->
 
-    {% if experience.details %}
-    <div class="details">
-      {{ experience.details | markdownify }}
-    </div><!--//details-->
-    {% endif %}
+      {% if experience.details %}
+      <div class="details">
+        {{ experience.details | markdownify }}
+      </div><!--//details-->
+      {% endif %}
 
-  </div><!--//item-->
+    </li><!--//item-->
   {% endfor %}
+  </ol>
 
 </section><!--//section-->
 {% endif %}
-

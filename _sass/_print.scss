@@ -1,61 +1,130 @@
+/* ======= Print =======
+ * Target: a clean, ATS-friendly 1–2 page document from Ctrl+P.
+ * Forces the light palette regardless of the on-screen theme, drops all
+ * interactive chrome, and keeps each role on a single page.
+ */
+
 @media print {
   @page {
     size: A4;
+    margin: 12mm 12mm;
   }
+
+  /* Print is always light, even if the visitor is browsing in dark mode. */
+  :root,
+  :root[data-theme="dark"] {
+    --page-bg: #fff;
+    --surface: #fff;
+    --sidebar-bg: #fff;
+    --sidebar-bg-header: #fff;
+    --text: #000;
+    --text-secondary: #1a1a1a;
+    --text-muted: #444;
+    --sidebar-text: #000;
+    --sidebar-muted: #444;
+    --accent: #000;
+    --link: #000;
+    --divider: #bbb;
+    --shadow-sm: none;
+    --shadow-md: none;
+  }
+
   body {
-    font-size: 9pt;
-    background-color: white;
+    font-size: 9.5pt;
+    line-height: 1.4;
+    background: #fff;
     padding: 0;
   }
+
   .wrapper {
-    max-width: 100%;
+    display: block;
+    max-width: none;
+    box-shadow: none;
   }
 
-  //   img.avatar {
-  //     filter: grayscale(1);
-  //     -webkit-filter: greyscale(1);
-  //   }
-  .main-wrapper .time {
-    padding: 10px 30px 10px 10px;
-    //  float: right;
-    //  color: black !important;
-    -webkit-print-color-adjust: exact;
-  }
   .sidebar-wrapper {
-    position: static;
-    //  float: right;
-    //  width: 40%;
-    -webkit-print-color-adjust: exact;
+    border-bottom: 1pt solid var(--divider);
   }
 
-  .remove-container.container-block {
+  .sidebar-wrapper .profile-container {
+    padding: 0 0 6pt;
+    text-align: start;
+  }
+
+  .sidebar-wrapper .container-block {
+    padding: 6pt 0;
+    border-top: 0;
+  }
+
+  /* Contact details read as a single inline run rather than a tall column. */
+  .contact-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4pt 14pt;
+  }
+
+  .contact-list li {
+    margin-bottom: 0 !important;
+  }
+
+  .main-wrapper {
+    padding: 8pt 0 0;
+  }
+
+  .main-wrapper .section {
+    margin-bottom: 12pt;
+  }
+
+  .main-wrapper .section-title {
+    font-size: 11pt;
+    margin-bottom: 6pt;
+    border-bottom: 0.5pt solid var(--divider);
+    padding-bottom: 2pt;
+  }
+
+  .section-icon {
     display: none;
   }
 
-  footer {
-    display: none;
+  .avatar {
+    width: 62px !important;
+    height: 62px !important;
   }
 
-  .skillset,
+  /* Never split a role, a degree or the skills block across pages. */
+  .experiences-section .item,
+  .educations-section .item,
+  .skillset .item,
   .container-block {
     break-inside: avoid;
+    page-break-inside: avoid;
   }
 
-  .skillset .level-bar-inner {
-    background-color: $theme-color !important;
-    -webkit-print-color-adjust: exact;
+  h1,
+  h2,
+  h3 {
+    break-after: avoid;
+    page-break-after: avoid;
   }
 
-   .fa-inverse,
-   .fa-inverse:after,
-   .fa-inverse:before {
-     color: #ffffff !important;
-   }
+  /* Expand external URLs — a printed page cannot be clicked. */
+  .main-wrapper a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 8pt;
+    color: #444;
+    word-break: break-all;
+  }
 
-    /* Hide buttons when printing */
-    .print-button,
-    .pdf-button,
-    .d-print-none {
-        display: none !important;
-    }
+  a {
+    text-decoration: none;
+  }
+
+  .page-actions,
+  .print-button,
+  .pdf-button,
+  .skip-link,
+  .footer,
+  .d-print-none {
+    display: none !important;
+  }
 }

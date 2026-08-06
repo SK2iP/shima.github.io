@@ -1,10 +1,27 @@
 /* ======= Base ======= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
-  font-family: "Roboto", sans-serif;
-  color: $text-color-secondary;
-  background: $smoky-white;
-  font-size: 14px;
-  padding: 30px;
+  /* System stack: no webfont request at all, so there is no swap reflow and
+     no third-party connection. Beats an optimised webfont on every metric
+     that matters here. */
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, "Noto Sans", sans-serif;
+  color: var(--text-secondary);
+  background: var(--page-bg);
+  font-size: var(--step-0);
+  line-height: 1.6;
+  margin: 0;
+  padding: var(--space-6);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -16,362 +33,438 @@ h4,
 h5,
 h6 {
   font-weight: 700;
-}
-
-a {
-  color: darken($theme-color, 15%);
-  &:hover {
-    text-decoration: underline;
-    color: darken($theme-color, 30%);
-  }
-  &:focus {
-    text-decoration: none;
-  }
+  line-height: 1.25;
+  text-wrap: balance;
 }
 
 p {
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
+a {
+  color: var(--link);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  transition: color var(--motion-fast) var(--ease);
+
+  &:hover {
+    color: var(--link-hover);
+    text-decoration: underline;
+  }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+ul,
+ol {
+  padding-inline-start: 1.15em;
+}
+
+/* ---- Focus ---------------------------------------------------------- */
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--space-2);
+  top: var(--space-2);
+  z-index: 1100;
+  padding: var(--space-2) var(--space-4);
+  background: var(--surface);
+  color: var(--link);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-md);
+  font-weight: 600;
+  transform: translateY(-200%);
+  transition: transform var(--motion-fast) var(--ease);
+
+  &:focus-visible {
+    transform: translateY(0);
+  }
+}
+
+/* ---- Icons ---------------------------------------------------------- */
+.svg-sprite {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.icon {
+  width: 1em;
+  height: 1em;
+  flex: none;
+  vertical-align: -0.125em;
+}
+
+.section-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75em;
+  height: 1.75em;
+  margin-inline-end: var(--space-2);
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--surface);
+  vertical-align: -0.5em;
+
+  .icon {
+    width: 0.9em;
+    height: 0.9em;
+    vertical-align: 0;
+  }
+}
+
+/* ---- Layout --------------------------------------------------------- */
 .wrapper {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
-  background: $theme-color;
+  background: var(--sidebar-bg);
   max-width: 1000px;
   margin: 0 auto;
   position: relative;
-  @include box-shadow(0px 2px 4px rgba(0, 0, 0, 0.1));
+  box-shadow: var(--shadow-md);
 }
 
+/* ---- Sidebar -------------------------------------------------------- */
 .sidebar-wrapper {
   grid-column: span 3;
   order: $sidebar-order;
-  background: $theme-color;
-  color: #fff;
+  background: var(--sidebar-bg);
+  color: var(--sidebar-text);
+
   a {
-    color: #fff;
+    color: var(--sidebar-text);
   }
+
+  :focus-visible {
+    outline-color: #fff;
+  }
+
   .profile-container {
-    padding: 30px;
-    //background: darken($theme-color, 10%);
-    background: rgba(0, 0, 0, 0.2);
+    padding: var(--space-6);
+    background: var(--sidebar-bg-header);
     text-align: center;
-    color: #fff;
   }
+
   .name {
-    font-size: 32px;
-    font-weight: 900;
-    margin-top: 0;
-    margin-bottom: 10px;
+    font-size: var(--step-3);
+    font-weight: 800;
+    margin: 0 0 var(--space-2);
+    letter-spacing: -0.02em;
   }
+
   .tagline {
-    color: rgba(256, 256, 256, 0.6);
-    font-size: 16px;
+    color: var(--sidebar-muted);
+    font-size: var(--step-1);
     font-weight: 400;
-    margin-top: 0;
-    margin-bottom: 0;
-  }
-  .tagline2 {
-    color: rgba(256, 256, 256, 0.6);
-    font-size: 16px;
-    font-weight: 400;
-    margin-top: 0;
-    margin-bottom: 0;
-  }
-  .profile {
-    margin-bottom: 15px;
+    margin: 0;
   }
 
   .avatar {
-    //used for profile image
-    max-width: 100px;
-    margin-bottom: 15px;
-    border: 0px solid #fff;
-    border-radius: 100%;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-bottom: var(--space-4);
+    border-radius: 50%;
+    box-shadow: var(--shadow-sm);
   }
+
   .contact-list {
-    .fas,
-    .fab,
-    .far {
-      margin-right: 5px;
-      font-size: 18px;
-      vertical-align: middle;
+    .icon {
+      width: 1.05em;
+      height: 1.05em;
+      margin-inline-end: var(--space-2);
+      color: var(--sidebar-muted);
     }
+
     li {
-      margin-bottom: 15px;
+      display: flex;
+      align-items: baseline;
+      margin-bottom: var(--space-4);
+      word-break: break-word;
+
       &:last-child {
         margin-bottom: 0;
       }
     }
   }
+
   .container-block {
-    padding: 30px;
+    padding: var(--space-6);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
   }
+
   .container-block-title {
     text-transform: uppercase;
-    font-size: 16px;
+    font-size: var(--step--1);
+    letter-spacing: 0.08em;
     font-weight: 700;
-    margin-top: 0;
-    margin-bottom: 15px;
+    margin: 0 0 var(--space-4);
+    color: var(--sidebar-text);
   }
+
   .degree {
-    font-size: 14px;
-    margin-top: 0;
-    margin-bottom: 5px;
+    font-size: var(--step-0);
+    font-weight: 600;
+    margin: 0 0 var(--space-1);
   }
+
   .education-container {
     .item {
-      margin-bottom: 15px;
+      margin-bottom: var(--space-4);
+
       &:last-child {
         margin-bottom: 0;
       }
     }
-    .meta {
-      color: rgba(256, 256, 256, 0.6);
-      font-weight: 500;
-      margin-bottom: 0px;
-      margin-top: 0;
-    }
+
+    .meta,
     .time {
-      color: rgba(256, 256, 256, 0.6);
-      font-weight: 500;
-      margin-bottom: 0px;
-    }
-  }
-  .languages-container {
-    .lang-desc {
-      color: rgba(256, 256, 256, 0.6);
+      color: var(--sidebar-muted);
+      font-size: var(--step--1);
+      margin: 0;
     }
   }
 
-  .languages-list {
-    margin-bottom: 0;
-    li {
-      margin-bottom: 10px;
-      &:last-child {
-        margin-bottom: 0;
-      }
-    }
+  .languages-container .lang-desc {
+    color: var(--sidebar-muted);
   }
 
-  .interests-list {
-    margin-bottom: 0;
-    li {
-      margin-bottom: 10px;
-      &:last-child {
-        margin-bottom: 0;
-      }
+  .languages-list li {
+    margin-bottom: var(--space-2);
+
+    &:last-child {
+      margin-bottom: 0;
     }
   }
 }
 
+/* ---- Main ----------------------------------------------------------- */
 .main-wrapper {
   grid-column: span 7;
   order: $resume-order;
-  background: #fff;
-  padding: 60px;
+  background: var(--surface);
+  padding: var(--space-8);
+
   .section-title {
+    display: flex;
+    align-items: center;
     text-transform: uppercase;
-    font-size: 20px;
-    font-weight: 500;
-    color: darken($theme-color, 15%);
-    position: relative;
-    margin-top: 0;
-    margin-bottom: 20px;
+    font-size: var(--step-2);
+    letter-spacing: 0.04em;
+    font-weight: 600;
+    color: var(--accent);
+    margin: 0 0 var(--space-5);
   }
+
   .section {
-    margin-bottom: 60px;
+    margin-bottom: var(--space-8);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .summary,
+  .details {
+    max-width: var(--measure);
+  }
+
+  .details ul {
+    padding-inline-start: 1.1em;
+
+    li {
+      margin-bottom: var(--space-2);
+    }
   }
 
   .experiences-section,
-  .recommendations-section,
   .educations-section {
     .item {
-      margin-bottom: 30px;
+      margin-bottom: var(--space-6);
+
+      &:last-child {
+        margin-bottom: 0;
+      }
     }
   }
-  .upper-row,
-  .second-upper-row {
-    position: relative;
-    overflow: hidden;
-    margin-bottom: 2px;
+
+  .upper-row {
     display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-2);
+    margin-bottom: var(--space-1);
   }
+
   .job-title,
-  .degree,
-  .cert-title,
-  .recommendation-person {
-    color: $text-color;
-    font-size: 16px;
-    margin-top: 0;
-    margin-bottom: 0;
-    font-weight: 500;
-    flex: 75%;
+  .degree {
+    color: var(--text);
+    font-size: var(--step-1);
+    font-weight: 600;
+    margin: 0;
   }
 
-  .time,
-  .cert-url {
-    position: absolute;
-    right: 0;
-    top: 0;
-    color: $text-grey;
-    flex: 25%;
+  .time {
+    color: var(--text-muted);
+    font-size: var(--step--1);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
   }
+
   .company,
-  .recommendation-role,
-  .university,
-  .cert-org {
-    margin-bottom: 10px;
-    color: $text-grey;
+  .university {
+    margin-bottom: var(--space-3);
+    color: var(--text-muted);
   }
 
-  .project-title {
-    font-size: 16px;
-    font-weight: 400;
-    margin-top: 0;
-    margin-bottom: 5px;
-    color: darken($theme-color, 15%);
-  }
-  .projects-section {
-    .intro {
-      margin-bottom: 30px;
-    }
-    .item {
-      margin-bottom: 15px;
-    }
-  }
-  .oss-section {
-    .intro {
-      margin-bottom: 30px;
-    }
-    .item {
-      margin-bottom: 15px;
-    }
-  }
-
-  .publication-title {
-    font-size: 16px;
-    font-weight: 400;
-    color: $text-color;
-    margin-bottom: 1px;
-  }
-  .publication-authors {
-    font-style: italic;
-    color: $text-grey;
-    margin-bottom: 1px;
-  }
-  .publications-section {
-    .intro {
-      margin-bottom: 30px;
-    }
-    .item {
-      margin-bottom: 15px;
-    }
+  .company-note {
+    display: block;
+    font-size: var(--step--1);
   }
 }
 
+/* Concurrent roles overlap in time, so the layout must not imply a strict
+   sequence — the badge states the overlap outright. */
+.badge-concurrent {
+  display: inline-block;
+  margin-inline-start: var(--space-2);
+  padding: 0.1em 0.6em;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-pill);
+  color: var(--accent);
+  font-size: var(--step--1);
+  font-weight: 600;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+/* ---- Skills --------------------------------------------------------- */
 .skillset {
   .item {
-    margin-bottom: 15px;
-    overflow: hidden;
+    margin-bottom: var(--space-4);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
+
   .level-title {
-    font-size: 14px;
-    margin-top: 0;
-    margin-bottom: 12px;
+    font-size: var(--step-0);
+    font-weight: 600;
+    color: var(--text);
+    margin: 0 0 var(--space-1);
   }
+
   .level2-title {
-    font-size: 12px;
-    margin-top: 0;
-    margin-bottom: 12px;
-  }
-  .level-bar {
-    height: 12px;
-    background: $smoky-white;
-  }
-  .level-bar-inner {
-    height: 12px;
-    background: lighten($theme-color, 15%);
+    font-size: var(--step-0);
+    color: var(--text-secondary);
+    margin: 0;
+    max-width: var(--measure);
   }
 }
 
+/* ---- Footer --------------------------------------------------------- */
 .footer {
-  padding-top: 30px;
+  padding-top: var(--space-6);
+
   .copyright {
     line-height: 1.6;
-    color: $text-color-secondary;
-    font-size: 13px;
+    color: var(--text-muted);
+    font-size: var(--step--1);
+    margin: 0;
   }
 
-  .fa-heart {
-    color: $heart;
-  }
-}
-
-.print-button {
-  position: fixed;
-  top: 20px;
-  right: 120px; // Changed from 20px to make space for the PDF button
-  z-index: 1000;
-  background: $theme-color;
-  color: #fff;
-  padding: 8px 15px;
-  border-radius: 4px;
-  border: none;
-  cursor: pointer;
-  font-size: 14px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
-  transition: all 0.3s ease;
-
-  &:hover {
-    background: darken($theme-color, 10%);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
-
-  &:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-
-  .fas {
-    margin-right: 5px;
+  .icon-heart {
+    color: var(--heart);
+    vertical-align: -0.15em;
   }
 }
 
-.pdf-button {
+/* ---- Floating controls ---------------------------------------------- */
+.page-actions {
   position: fixed;
-  top: 20px;
-  right: 20px;
+  top: var(--space-4);
+  right: var(--space-4);
   z-index: 1000;
-  background: $theme-color;
-  color: #fff;
-  padding: 8px 15px;
-  border-radius: 4px;
-  border: none;
+  display: flex;
+  gap: var(--space-2);
+}
+
+.btn-action {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: var(--surface);
+  color: var(--text);
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--divider);
+  border-radius: var(--radius-md);
   cursor: pointer;
-  font-size: 14px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
-  transition: all 0.3s ease;
+  font: inherit;
+  font-size: var(--step--1);
+  box-shadow: var(--shadow-sm);
+  transition: background var(--motion-fast) var(--ease),
+    border-color var(--motion-fast) var(--ease);
 
   &:hover {
-    background: darken($theme-color, 10%);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background: var(--page-bg);
+    border-color: var(--accent);
+  }
+}
+
+/* Show the icon matching the theme the button switches *to*. */
+.icon-theme-dark {
+  display: none;
+}
+
+:root[data-theme="dark"] {
+  .icon-theme-dark {
+    display: inline-block;
   }
 
-  &:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  .icon-theme-light {
+    display: none;
+  }
+}
+
+/* ---- Motion --------------------------------------------------------- */
+/* Applied only when app.js confirms motion is welcome, so content is never
+   left invisible if JavaScript fails. */
+.js-reveal .main-wrapper .section {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity var(--motion-base) var(--ease),
+    transform var(--motion-base) var(--ease);
+}
+
+.js-reveal .main-wrapper .section.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
   }
 
-  &:disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
-  }
-
-  .fas {
-    margin-right: 5px;
+  .js-reveal .main-wrapper .section {
+    opacity: 1;
+    transform: none;
   }
 }

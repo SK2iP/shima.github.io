@@ -1,34 +1,41 @@
 ---
-#Add "layout: compress" here to compress the html code
 ---
 <!DOCTYPE html>
-<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
-<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
-<!--[if !IE]><!-->
-<html lang="en"> <!--<![endif]-->
+<html lang="en">
 {% include head.html %}
 
 <body>
-  <button onclick="print()" class="print-button d-print-none">
-    <i class="fas fa-file-pdf"></i>Print
-  </button>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-  <button onclick="generatePDF()" class="pdf-button d-print-none" id="pdfButton">
-    <i class="fas fa-file-pdf"></i>PDF
-  </button>
+  {% include icons.html %}
+
+  {% comment %}
+    Hidden until JS upgrades them, so a no-JS visitor is never shown a dead
+    control. Ctrl+P still produces the print stylesheet without any of this.
+  {% endcomment %}
+  <div class="page-actions d-print-none" id="page-actions" hidden>
+    <button type="button" class="btn-action" id="theme-toggle" aria-pressed="false">
+      <svg class="icon icon-theme-light" aria-hidden="true"><use href="#i-sun" /></svg>
+      <svg class="icon icon-theme-dark" aria-hidden="true"><use href="#i-moon" /></svg>
+      <span id="theme-toggle-label">Dark theme</span>
+    </button>
+
+    <button type="button" class="btn-action" id="print-button">
+      <svg class="icon" aria-hidden="true"><use href="#i-printer" /></svg>
+      <span>Print</span>
+    </button>
+  </div>
 
   <div class="wrapper">
     {% include sidebar.html %}
 
-    <div class="main-wrapper">
+    <main class="main-wrapper" id="main">
       {{ content }}
-    </div>
+    </main>
   </div>
 
   {% include footer.html %}
-
   {% include scripts.html %}
-  <script src="{{ site.baseurl }}/assets/js/pdf-generator.js"></script>
 </body>
 
 </html>

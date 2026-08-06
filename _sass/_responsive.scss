@@ -1,64 +1,45 @@
-/* Extra small devices (phones, less than 768px) */
+/* ======= Responsive ======= */
+
+/* Phones */
 @media (max-width: 767px) {
   body {
     padding: 0;
   }
 
-  .sidebar-wrapper {
-    position: static;
-    width: inherit;
-  }
-
   .wrapper {
     display: block;
+    max-width: none;
+  }
+
+  .sidebar-wrapper {
+    position: static;
+    width: auto;
   }
 
   .main-wrapper {
-    padding: 30px;
-  }
-
-  .main-wrapper .time {
-    position: static;
-    display: block;
-    margin-top: 5px;
+    padding: var(--space-6) var(--space-5);
   }
 
   .main-wrapper .upper-row {
-    margin-bottom: 0;
+    margin-bottom: var(--space-1);
+  }
+
+  .page-actions {
+    top: auto;
+    bottom: var(--space-3);
+    right: var(--space-3);
   }
 }
-/* Small devices (tablets, 768px and up) */
+
+/* Tablets and up */
 @media (min-width: 768px) {
+  body {
+    padding: var(--space-5) var(--space-4);
+  }
 }
 
-/* Medium devices (desktops, 992px and up) */
 @media (min-width: 992px) {
-  .skillset .level-title {
-    float: left;
-    width: 30%;
-    margin-bottom: 0;
+  body {
+    padding: var(--space-6);
   }
-
-  .skillset .level-bar {
-    width: 70%;
-    float: left;
-    position: relative;
-    top: 1px;
-  }
-}
-
-.skillset .level-bar-inner {
-  width: auto;
-  -webkit-transition: width 2s ease-in-out;
-  -moz-transition: width 2s ease-in-out;
-  -o-transition: width 2s ease-in-out;
-  transition: width 2s ease-in-out;
-}
-
-/* Large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {
-}
-
-/* Ex-Large devices (large desktops, 1200px and up) */
-@media (min-width: 1400px) {
 }

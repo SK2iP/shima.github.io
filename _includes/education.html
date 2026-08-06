@@ -3,51 +3,49 @@
   {% if site.data.data.sidebar.education %}
   <div class="education-container container-block">
 
-    <h2 class="container-block-title">
-      {{ education.title }}
-    </h2>
+    <h2 class="container-block-title">{{ education.title }}</h2>
 
-    {% for graduation in education.info %}
-    <div class="item">
-      <h4 class="degree">{{ graduation.degree }}</h4>
-      <h5 class="meta">{{ graduation.university }}</h5>
-      <div class="time">{{ graduation.time }}</div>
-    </div><!--//item-->
-    {% endfor %}
+    <ol class="list-unstyled">
+      {% for graduation in education.info %}
+      <li class="item">
+        <h3 class="degree">{{ graduation.degree }}</h3>
+        <p class="meta">{{ graduation.university }}</p>
+        <p class="time">{{ graduation.time }}</p>
+      </li><!--//item-->
+      {% endfor %}
+    </ol>
 
   </div><!--//education-container-->
   {% else %}
-  <section class="section educations-section">
+  <section class="section educations-section" id="education" aria-labelledby="education-title">
 
-    <h2 class="section-title">
-      <span class="fa-stack fa-xs">
-        <i class="fas fa-circle fa-stack-2x"></i>
-        <i class="fas fa-graduation-cap fa-stack-1x fa-inverse"></i>
-      </span>
+    <h2 class="section-title" id="education-title">
+      <span class="section-icon" aria-hidden="true"><svg class="icon"><use href="#i-graduation-cap" /></svg></span>
       {{ education.title }}
     </h2>
 
-    {% for graduation in education.info %}
-    <div class="item">
+    <ol class="item-list list-unstyled">
+      {% for graduation in education.info %}
+      <li class="item">
 
-      <div class="meta">
+        <div class="meta">
+          <div class="upper-row">
+            <h3 class="degree">{{ graduation.degree }}</h3>
+            <div class="time">{{ graduation.time }}</div>
+          </div><!--//upper-row-->
 
-        <div class="upper-row">
-          <h3 class="degree">{{ graduation.degree }}</h3>
-          <div class="time">{{ graduation.time }}</div>
-        </div><!--//upper-row-->
+          <div class="university">{{ graduation.university }}</div>
+        </div><!--//meta-->
 
-        <div class="university">{{ graduation.university }}</div>
-      </div><!--//meta-->
+        {% if graduation.details %}
+        <div class="details">
+          {{ graduation.details | markdownify }}
+        </div><!--//details-->
+        {% endif %}
 
-      {% if graduation.details %}
-      <div class="details">
-        {{ graduation.details | markdownify }}
-      </div><!--//details-->
-      {% endif %}
-
-    </div><!--//item-->
-    {% endfor %}
+      </li><!--//item-->
+      {% endfor %}
+    </ol>
 
   </section><!--//section-->
   {% endif %}

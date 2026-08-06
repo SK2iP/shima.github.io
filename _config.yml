@@ -1,20 +1,26 @@
-#Update all the sections by editing the data.yml file inside _data folder.
+# Update all the sections by editing the data.yml file inside _data folder.
 
 # Site Settings
-title: Sadra Khanjari
-url: 'http://webjeda.com'
+title: Shima Nouri
+tagline: Senior Frontend Developer
 
-#change it according to your repository name
-# disabling since we are using a custom domain
-#baseurl: '/online-cv' 
+# Served from https://shima.github.io/shima.github.io/
+# If this repo is ever transferred to a GitHub account named `shima`, it becomes
+# a user site: set url to 'https://shima.github.io' and baseurl to ''.
+url: 'https://shima.github.io'
+baseurl: '/shima.github.io'
 
-description: Sadra Khanjari's Online CV
+description: >-
+  Shima Nouri is a Senior Frontend Developer in Tehran, Iran with 5+ years
+  building high-performance React, Next.js and TypeScript applications.
+
 # Style will be applied only after restarting the build or serve. Just choose one of the options.
 theme_skin: blue # blue turquoise green berry orange ceramic teal oceanstale
-chrome_mobile_color: #use hex colors (ex:#1976d2) or leave empty if you don't want a color for chrome mobile searchbar
+chrome_mobile_color: '#1976d2' # use hex colors (ex:#1976d2) or leave empty if you don't want a color for chrome mobile searchbar
 
 # Tracker
-analytics: UA-83979019-1
+# No analytics configured. Set to a GA4 measurement ID (G-XXXXXXX) to enable.
+analytics:
 
 # Sass/SCSS
 sass:

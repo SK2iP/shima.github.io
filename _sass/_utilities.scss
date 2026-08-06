@@ -1,12 +1,44 @@
+/* ======= Utilities =======
+ * The four Bootstrap classes this theme actually used, reimplemented locally.
+ * Bootstrap itself (1.1 MB) was removed — the layout is CSS Grid, not a
+ * Bootstrap grid, so nothing else depended on it.
+ */
+
+.list-unstyled {
+  list-style: none;
+  padding-inline-start: 0;
+  margin: 0;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Visible to screen readers only. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .d-flex {
   display: flex;
 }
+
 .ml-auto {
-  margin-left: auto;
+  margin-inline-start: auto;
 }
+
 .mr-1 {
-  margin-right: 0.5rem;
+  margin-inline-end: 0.5rem;
 }
+
 .mb-1 {
   margin-bottom: 0.5rem;
 }

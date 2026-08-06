@@ -1,0 +1,98 @@
+/* ======= Design tokens =======
+ * Single source of truth for colour, type and spacing.
+ * The SCSS skin variables (_sass/skins/*.scss) seed the light palette; every
+ * rule downstream reads the custom properties so the dark theme is a
+ * token swap rather than a second stylesheet.
+ *
+ * The sidebar surface is a deepened form of the skin hue: the original
+ * $theme-color (#42A8C0) renders white text at ~2.6:1, which fails WCAG AA.
+ * Same colour family, accessible contrast.
+ */
+
+:root {
+  color-scheme: light;
+
+  /* Surfaces */
+  --page-bg: #f2f4f5;
+  --surface: #ffffff;
+  /* Deepened far enough that muted sidebar text still clears 4.5:1.
+     At the skin's own lightness there is no room for a dimmer tone at AA. */
+  --sidebar-bg: #{darken($theme-color, 24%)};
+  --sidebar-bg-header: #{darken($theme-color, 30%)};
+
+  /* Text */
+  --text: #2f3640;
+  --text-secondary: #454e5c;
+  --text-muted: #66707e;
+  --sidebar-text: #ffffff;
+  --sidebar-muted: #{lighten($theme-color, 30%)};
+
+  /* Accents */
+  --accent: #{darken($theme-color, 15%)};
+  --link: #{darken($theme-color, 24%)};
+  --link-hover: #{darken($theme-color, 34%)};
+  --divider: #e5e8eb;
+  --heart: #{$heart};
+
+  /* Focus ring — same token in both themes so it is never invisible */
+  --focus-ring: #0b7fa8;
+  --focus-ring-offset: var(--surface);
+
+  --shadow-sm: 0 1px 2px rgba(16, 24, 32, 0.08);
+  --shadow-md: 0 2px 8px rgba(16, 24, 32, 0.12);
+
+  /* Fluid type scale */
+  --step--1: clamp(0.78rem, 0.75rem + 0.12vw, 0.84rem);
+  --step-0: clamp(0.88rem, 0.85rem + 0.15vw, 0.98rem);
+  --step-1: clamp(0.98rem, 0.93rem + 0.22vw, 1.1rem);
+  --step-2: clamp(1.1rem, 1rem + 0.42vw, 1.32rem);
+  --step-3: clamp(1.5rem, 1.2rem + 1.3vw, 2.15rem);
+
+  /* Spacing scale */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 2.75rem;
+  --space-8: 3.75rem;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-pill: 999px;
+
+  /* Keeps body copy inside a comfortable 60–75 character measure */
+  --measure: 68ch;
+
+  --motion-fast: 150ms;
+  --motion-base: 220ms;
+  --ease: cubic-bezier(0.2, 0, 0.2, 1);
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --page-bg: #0e1318;
+  --surface: #161c23;
+  --sidebar-bg: #{darken($theme-color, 36%)};
+  --sidebar-bg-header: #{darken($theme-color, 40%)};
+
+  --text: #e7edf3;
+  --text-secondary: #c5ced9;
+  --text-muted: #97a2b0;
+  --sidebar-text: #f2f8fa;
+  --sidebar-muted: #{lighten($theme-color, 30%)};
+
+  --accent: #{lighten($theme-color, 12%)};
+  --link: #{lighten($theme-color, 20%)};
+  --link-hover: #{lighten($theme-color, 32%)};
+  --divider: #242c36;
+  --heart: #{lighten($heart, 6%)};
+
+  --focus-ring: #6cc7e8;
+  --focus-ring-offset: var(--surface);
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 2px 10px rgba(0, 0, 0, 0.6);
+}
